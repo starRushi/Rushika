@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------
+# SITE SETTINGS
+# Change these to your own details.
+# ---------------------------------------------------------------
+title: "Your Name"
+tagline: "Mechanical Engineer"
+email: "you@example.com"
+linkedin: "https://www.linkedin.com/in/your-handle/"
+github: "https://github.com/your-username"
+
+# ---------------------------------------------------------------
+# URL SETTINGS
+# baseurl = the subpath your site lives at.
+#
+#   Repo named "your-name"          ->  baseurl: "/your-name"
+#   Repo named "username.github.io" ->  baseurl: ""      (root site)
+#
+# When you rename the repo later, change this one line.
+# ---------------------------------------------------------------
+baseurl: "/your-name"
+url: "https://your-username.github.io"
+
+# ---------------------------------------------------------------
+# COLLECTIONS
+# Every file in _projects/ automatically becomes its own page.
+# ---------------------------------------------------------------
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+# ---------------------------------------------------------------
+# BUILD
+# ---------------------------------------------------------------
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - preview.html
