@@ -1,0 +1,32 @@
+# Each category becomes a hover panel on the homepage and a section
+# on the projects page. The `slug` is what you put in a project's
+# front matter under `category:` to file it here.
+#
+# `tint` is the panel background. These five step evenly from coral
+# (#fa8f72) to leaf green (#7cb93d). Retune them here if you want.
+# Text on every panel is rust, going gold on hover; that lives in the CSS.
+
+- name: "Robotics"
+  slug: "robotics"
+  tint: "#fa8f72"
+  blurb: "Mechanisms, actuation, and the embedded systems that drive them. Mobile robots, control loops, and hardware that has to survive contact with the real world."
+
+- name: "Design"
+  slug: "design"
+  tint: "#da9a65"
+  blurb: "Form, mechanism, and manufacture. CAD, tolerancing, and prototypes taken from a sketch through to a part you can hold."
+
+- name: "Business"
+  slug: "business"
+  tint: "#bba458"
+  blurb: "The other half of getting a product built: cost, market, and the case for why a thing should exist before it gets designed."
+
+- name: "Material Transport"
+  slug: "material-transport"
+  tint: "#9cae4a"
+  blurb: "Moving mass through space reliably. Conveyance, lifting, and handling systems where throughput and repeatability are the whole problem."
+
+- name: "Awards & Competitions"
+  slug: "awards"
+  tint: "#7cb93d"
+  blurb: "Work built against a clock and a rulebook, and what the constraints taught that coursework could not."

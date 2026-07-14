@@ -1,0 +1,28 @@
+---
+layout: default
+title: Resume
+permalink: /resume/
+---
+<main class="page wrap">
+  <p class="page__eyebrow mono">Resume</p>
+  <h1 class="page__title">Resume</h1>
+  <hr class="page__rule">
+
+  <div class="btn-row">
+    <a class="btn" href="{{ '/assets/docs/resume.pdf' | relative_url }}" download>
+      Download PDF
+    </a>
+    <a class="btn btn--ghost" href="{{ site.linkedin }}">View LinkedIn</a>
+  </div>
+
+  <!-- Drop your PDF at assets/docs/resume.pdf and it renders right here. -->
+  <object data="{{ '/assets/docs/resume.pdf' | relative_url }}"
+          type="application/pdf"
+          width="100%"
+          style="height:min(140vh,1100px);border:1px solid var(--paper-deep)">
+    <p style="padding:2rem">
+      Your browser will not display the PDF inline.
+      <a href="{{ '/assets/docs/resume.pdf' | relative_url }}">Download it instead.</a>
+    </p>
+  </object>
+</main>

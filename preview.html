@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name · Mechanical Engineer — PREVIEW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===============================================================
+   PALETTE
+   Your five colors, given names so you never type a hex twice.
+   Change a value here and it updates everywhere on the site.
+   =============================================================== */
+:root {
+  --paper:      #f3e7c7;  /* cream, the page background */
+  --paper-deep: #e8d9b0;  /* a shade down, for edges and cards */
+  --forest:     #194a05;  /* dark green, used as the ink color */
+  --leaf:       #7cb93d;  /* bright green */
+  --gold:       #ecc663;  /* gold */
+  --coral:      #fa8f72;  /* coral */
+  --rust:       #722f0f;  /* deep brown */
+
+  --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --nav-h: 4.5rem;
+  --edge:  clamp(1.5rem, 5vw, 5rem);   /* page side margin */
+}
+
+/* ===============================================================
+   BASE
+   =============================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--forest);
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.25rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { max-width: 100%; display: block; }
+
+a { color: var(--rust); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--leaf); }
+
+:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* The small technical voice: nav, labels, captions, counts. */
+.mono {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--edge); }
+
+/* ===============================================================
+   NAV
+   Transparent while it sits over the hero, then solidifies.
+   =============================================================== */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--edge);
+  color: var(--paper);
+  transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav.is-solid {
+  background: var(--paper);
+  color: var(--forest);
+  box-shadow: 0 1px 0 var(--paper-deep);
+}
+
+.nav__mark {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav__links {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__links a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+/* Underline grows from the left on hover. */
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after { transform: scaleX(1); }
+
+/* ===============================================================
+   HERO
+   The tall outer box is the scroll runway. The inner box sticks to
+   the viewport while you scroll through it, and JS scrubs the video
+   forward as you go. Change --runway to make the spin longer.
+   =============================================================== */
+.hero {
+  --runway: 300vh;
+  height: var(--runway);
+  position: relative;
+  background: var(--forest);
+}
+
+.hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Shown until you drop a real video in. Spins with scroll so you can
+   see the effect working before you have footage. */
+.hero__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 45%, #24660a 0%, var(--forest) 60%, #0d2a03 100%);
+}
+.hero__placeholder svg { width: min(46vmin, 380px); height: auto; overflow: visible; }
+.hero__placeholder-note {
+  position: absolute;
+  bottom: 8%;
+  color: var(--gold);
+  opacity: 0.55;
+}
+
+/* Darkens the video just enough that the title stays legible. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(25, 74, 5, 0.55) 0%,
+    rgba(25, 74, 5, 0.15) 40%,
+    rgba(25, 74, 5, 0.75) 100%);
+}
+
+.hero__title {
+  position: relative;
+  text-align: center;
+  color: var(--paper);
+  padding: 0 var(--edge);
+}
+
+.hero__eyebrow { color: var(--gold); margin-bottom: 1.5rem; }
+
+.hero__name {
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  line-height: 1;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.hero__rule {
+  width: 3.5rem;
+  height: 2px;
+  background: var(--coral);
+  margin: 1.75rem auto;
+  border: 0;
+}
+
+.hero__sub {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-style: italic;
+  margin: 0;
+  color: var(--paper);
+  opacity: 0.9;
+}
+
+.hero__cue {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--paper);
+  opacity: 0.75;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero__cue-line {
+  width: 1px; height: 2.5rem;
+  background: currentColor;
+  animation: cue 2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes cue {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+  50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+/* ===============================================================
+   PHILOSOPHY QUOTE
+   A full-bleed forest field. The one loud moment on the page.
+   =============================================================== */
+.quote {
+  background: var(--paper);
+  color: var(--forest);
+  padding: clamp(6rem, 14vh, 10rem) 0;
+  position: relative;
+}
+
+/* Hairline rules stand in for the color block that used to frame this. */
+.quote__inner::before,
+.quote__inner::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--paper-deep);
+}
+.quote__inner::before { margin-bottom: clamp(3rem, 7vh, 4.5rem); }
+.quote__inner::after  { margin-top:    clamp(3rem, 7vh, 4.5rem); }
+
+.quote__inner { max-width: 60rem; margin: 0 auto; padding: 0 var(--edge); }
+
+.quote__mark {
+  font-size: clamp(5rem, 12vw, 9rem);
+  line-height: 0.6;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+  font-family: var(--serif);
+}
+
+.quote__text {
+  font-size: clamp(1.6rem, 3.6vw, 2.9rem);
+  line-height: 1.32;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.quote__text em {
+  font-style: italic;
+  color: var(--rust);
+  border-bottom: 2px solid var(--gold);
+}
+
+.quote__attr { margin-top: 2.5rem; color: var(--rust); opacity: 0.65; }
+
+/* ===============================================================
+   CATEGORY PANELS
+   Five panels side by side. Hovering one lets it grow and the blurb
+   fades in. On narrow screens they stack and the blurb is always up.
+   =============================================================== */
+.cats { padding: clamp(4.5rem, 10vh, 7rem) 0 clamp(5rem, 12vh, 8rem); }
+
+.cats__head { margin-bottom: 2.5rem; }
+.cats__title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin: 0;
+  font-weight: 500;
+}
+
+.panels {
+  display: flex;
+  gap: 4px;
+  height: 19rem;   /* shorter, so a closed panel is not mostly empty */
+}
+
+.panel {
+  flex: 1 1 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  text-decoration: none;
+  min-width: 0;
+  transition: flex-grow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Each panel's background comes from its `tint` in _data/categories.yml,
+   passed in as --tint. The five tints step evenly from coral to leaf. */
+.panel {
+  background: var(--tint, var(--coral));
+  color: var(--rust);
+  transition: flex-grow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.3s ease,
+              box-shadow 0.4s ease;
+}
+
+.panel:hover, .panel:focus-visible {
+  flex-grow: 3.4;
+  color: var(--gold);
+  /* Sinks the panel a shade so the gold text has something to sit on.
+     Delete this line if you want the tint to stay flat on hover. */
+  box-shadow: inset 0 0 0 100vmax rgba(25, 74, 5, 0.32);
+}
+
+.panel__count {
+  color: inherit;
+  opacity: 0.6;
+  margin-bottom: 0.6rem;   /* was margin-bottom:auto, which forced the gap */
+}
+
+.panel__name {
+  font-size: clamp(1.35rem, 1.7vw, 1.75rem);
+  line-height: 1.15;
+  margin: 0;
+  font-weight: 500;
+  color: inherit;
+}
+
+/* Held at zero height so it does not push the name around while closed. */
+.panel__body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.35s ease;
+}
+.panel:hover .panel__body,
+.panel:focus-visible .panel__body {
+  max-height: 11rem;
+  opacity: 1;
+  transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.45s ease 0.15s;
+}
+
+.panel__blurb {
+  margin: 0.9rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 26rem;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.panel__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  color: inherit;
+}
+.panel__go svg { width: 1.4rem; height: 1.4rem; }
+.panel:hover .panel__go svg { transform: translateX(4px); }
+.panel__go svg { transition: transform 0.35s ease; }
+
+/* ===============================================================
+   FOOTER
+   =============================================================== */
+.footer {
+  background: var(--paper);
+  color: var(--forest);
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--paper-deep);
+}
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer a { color: var(--rust); }
+.footer a:hover { color: var(--leaf); }
+.footer__links { display: flex; gap: 1.75rem; }
+
+/* ===============================================================
+   INNER PAGES (about, resume, contact, projects, project detail)
+   =============================================================== */
+.page { padding: calc(var(--nav-h) + 4rem) 0 6rem; }
+
+.page__eyebrow { color: var(--rust); opacity: 0.7; }
+.page__title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  margin: 0.75rem 0 0;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+.page__rule {
+  border: 0;
+  height: 1px;
+  background: var(--paper-deep);
+  margin: 2.5rem 0;
+}
+.prose { max-width: 42rem; }
+.prose h2 { font-size: 1.6rem; margin: 2.5rem 0 0.75rem; font-weight: 600; }
+.prose img { margin: 2rem 0; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--forest);
+  color: var(--paper);
+  padding: 0.85rem 1.5rem;
+  text-decoration: none;
+  border: 1px solid var(--forest);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn:hover { background: transparent; color: var(--forest); }
+.btn--ghost { background: transparent; color: var(--forest); }
+.btn--ghost:hover { background: var(--forest); color: var(--paper); }
+
+.btn-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+
+/* Project grid, used on the projects page */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 2rem;
+}
+.card { text-decoration: none; color: inherit; display: block; }
+.card__img {
+  aspect-ratio: 4 / 3;
+  background: var(--paper-deep);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.card:hover .card__img img { transform: scale(1.04); }
+.card__name { font-size: 1.3rem; margin: 0 0 0.35rem; font-weight: 500; }
+.card__sum { margin: 0; font-size: 1rem; color: var(--rust); }
+
+.cat-section { margin-bottom: 4.5rem; }
+.cat-section__head {
+  display: flex; align-items: baseline; gap: 1rem;
+  border-bottom: 1px solid var(--paper-deep);
+  padding-bottom: 0.75rem; margin-bottom: 2rem;
+}
+.cat-section__name { font-size: 1.75rem; margin: 0; font-weight: 500; }
+
+/* Collaborator chips on a project page */
+.people { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.person {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border: 1px solid var(--paper-deep);
+  padding: 0.4rem 0.85rem;
+  text-decoration: none;
+  color: var(--rust);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.person:hover { border-color: var(--leaf); background: rgba(124, 185, 61, 0.12); }
+
+.spec { list-style: none; padding: 0; margin: 0; }
+.spec li {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--paper-deep);
+}
+
+/* ===============================================================
+   RESPONSIVE
+   =============================================================== */
+@media (max-width: 860px) {
+  .panels { flex-direction: column; height: auto; }
+  .panel { padding: 1.5rem; min-height: 9rem; }
+  .panel:hover, .panel:focus-visible { flex-grow: 1; }
+  /* No hover on touch, so the blurb is simply always visible. */
+  .panel__body { max-height: 14rem; opacity: 1; }
+  .nav__links { gap: 0.9rem; }
+  .nav__mark { display: none; }
+  .hero { --runway: 200vh; }
+}
+
+/* ===============================================================
+   ACCESSIBILITY
+   =============================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style></head><body>
+<nav class="nav" data-nav><a class="nav__mark" href="#">Your Name</a>
+<ul class="nav__links mono"><li><a href="#" aria-current="page">Home</a></li><li><a href="#">Resume</a></li><li><a href="#">Projects</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></nav>
+
+
+<!-- =============================================================
+     HERO
+     Drop your render at assets/videos/hero.mp4 and it takes over
+     automatically. Until then the placeholder spins in its place
+     so you can see the scroll effect working.
+
+     Video tips: 10 to 20 seconds, no audio, exported at 1920x1080.
+     A turntable spin of a single assembly reads best.
+     ============================================================= -->
+<section class="hero" data-hero>
+  <div class="hero__sticky">
+
+    <video class="hero__video" data-hero-video muted playsinline preload="auto">
+      <source src="assets/videos/hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero__placeholder" data-hero-placeholder>
+      <svg viewBox="-100 -100 200 200" data-spin aria-hidden="true">
+        <g fill="none" stroke="#7cb93d" stroke-width="1.2" opacity="0.9">
+          <circle r="78" stroke="#ecc663" stroke-dasharray="3 6" opacity="0.5"/>
+          <circle r="58"/>
+          <circle r="30" stroke="#fa8f72"/>
+          <path d="M0-58 0-30 M0 30 0 58 M-58 0-30 0 M30 0 58 0"/>
+          <path d="M-41-41-21-21 M41 41 21 21 M41-41 21-21 M-41 41-21 21" opacity="0.6"/>
+          <rect x="-14" y="-14" width="28" height="28" stroke="#f3e7c7"/>
+        </g>
+      </svg>
+      <p class="hero__placeholder-note mono">Placeholder · add assets/videos/hero.mp4</p>
+    </div>
+
+    <div class="hero__scrim"></div>
+
+    <div class="hero__title">
+      <p class="hero__eyebrow mono">Mechanical Engineer</p>
+      <h1 class="hero__name">Your Name</h1>
+      <hr class="hero__rule">
+      <p class="hero__sub">Things that move, and the reasons they hold together.</p>
+    </div>
+
+    <div class="hero__cue">
+      <span class="hero__cue-line"></span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================================
+     PHILOSOPHY
+     Swap the text below for your own line when you land on it.
+     Wrap a phrase in <em> to give it the gold underline.
+     ============================================================= -->
+<section class="quote">
+  <div class="quote__inner">
+    <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+    <blockquote class="quote__text">
+      A drawing is a promise, and a part is the proof. I design toward the
+      moment the two meet, because that is the only place a <em>good idea</em>
+      is ever actually tested.
+    </blockquote>
+    <p class="quote__attr mono">Design philosophy · placeholder, replace me</p>
+  </div>
+</section>
+
+
+<!-- =============================================================
+     CATEGORIES
+     These come from _data/categories.yml. Edit that file to change
+     the names, the hover text, or the colors. The project count
+     updates itself as you add projects.
+     ============================================================= -->
+<section class="cats">
+  <div class="wrap">
+
+    <div class="cats__head">
+      <h2 class="cats__title">Where the work lives</h2>
+    </div>
+
+    <div class="panels">
+              <a class="panel" style="--tint: #fa8f72" href="projects.html#robotics">
+          <span class="panel__count mono">0 projects</span>
+          <h3 class="panel__name">Robotics</h3>
+          <div class="panel__body">
+            <p class="panel__blurb">Mechanisms, actuation, and the embedded systems that drive them. Mobile robots, control loops, and hardware that has to survive contact with the real world.</p>
+            <span class="panel__go mono">View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="panel" style="--tint: #da9a65" href="projects.html#design">
+          <span class="panel__count mono">0 projects</span>
+          <h3 class="panel__name">Design</h3>
+          <div class="panel__body">
+            <p class="panel__blurb">Form, mechanism, and manufacture. CAD, tolerancing, and prototypes taken from a sketch through to a part you can hold.</p>
+            <span class="panel__go mono">View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="panel" style="--tint: #bba458" href="projects.html#business">
+          <span class="panel__count mono">0 projects</span>
+          <h3 class="panel__name">Business</h3>
+          <div class="panel__body">
+            <p class="panel__blurb">The other half of getting a product built: cost, market, and the case for why a thing should exist before it gets designed.</p>
+            <span class="panel__go mono">View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="panel" style="--tint: #9cae4a" href="projects.html#material-transport">
+          <span class="panel__count mono">0 projects</span>
+          <h3 class="panel__name">Material Transport</h3>
+          <div class="panel__body">
+            <p class="panel__blurb">Moving mass through space reliably. Conveyance, lifting, and handling systems where throughput and repeatability are the whole problem.</p>
+            <span class="panel__go mono">View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="panel" style="--tint: #7cb93d" href="projects.html#awards">
+          <span class="panel__count mono">0 projects</span>
+          <h3 class="panel__name">Awards & Competitions</h3>
+          <div class="panel__body">
+            <p class="panel__blurb">Work built against a clock and a rulebook, and what the constraints taught that coursework could not.</p>
+            <span class="panel__go mono">View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer"><div class="wrap footer__inner"><p class="mono" style="margin:0">&copy; 2026 Your Name</p>
+<div class="footer__links mono"><a href="#">LinkedIn</a><a href="#">GitHub</a><a href="#">Email</a></div></div></footer>
+<script>
+/* ---------------------------------------------------------------
+   1. NAV
+   Goes solid once you have scrolled past the hero's first screen.
+   --------------------------------------------------------------- */
+(function () {
+  var nav = document.querySelector('[data-nav]');
+  if (!nav) return;
+
+  // On pages without a hero, the nav is solid from the start.
+  var hasHero = !!document.querySelector('[data-hero]');
+  if (!hasHero) {
+    nav.classList.add('is-solid');
+    return;
+  }
+
+  function update() {
+    nav.classList.toggle('is-solid', window.scrollY > window.innerHeight * 0.85);
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
+
+/* ---------------------------------------------------------------
+   2. SCROLL-SCRUBBED HERO
+   The hero is a tall box with a sticky screen inside it. As you
+   scroll through the box we work out how far you are (0 to 1) and
+   push the video to the matching frame, so the render appears to
+   spin under your thumb.
+
+   If no video loads, the same 0-to-1 value spins an SVG placeholder
+   instead, so you can see the effect before you have footage.
+   --------------------------------------------------------------- */
+(function () {
+  var hero = document.querySelector('[data-hero]');
+  if (!hero) return;
+
+  var video = hero.querySelector('[data-hero-video]');
+  var placeholder = hero.querySelector('[data-hero-placeholder]');
+  var spinner = hero.querySelector('[data-spin]');
+
+  var hasVideo = false;
+  var duration = 0;
+  var target = 0;   // where scroll says we should be
+  var current = 0;  // where we actually are, chasing target
+  var ticking = false;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (video) {
+    video.addEventListener('loadedmetadata', function () {
+      if (!video.duration || !isFinite(video.duration)) return;
+      hasVideo = true;
+      duration = video.duration;
+      video.pause();
+      if (placeholder) placeholder.style.display = 'none';
+    });
+    // No file there yet (or the browser cannot play it): keep the placeholder.
+    video.addEventListener('error', function () {
+      hasVideo = false;
+    });
+  }
+
+  // How far through the hero we have scrolled, clamped to 0..1.
+  function progress() {
+    var box = hero.getBoundingClientRect();
+    var runway = hero.offsetHeight - window.innerHeight;
+    if (runway <= 0) return 0;
+    var p = -box.top / runway;
+    return Math.min(1, Math.max(0, p));
+  }
+
+  function render() {
+    ticking = false;
+
+    // Ease toward the target so scrubbing feels weighted, not twitchy.
+    current += (target - current) * (reduced ? 1 : 0.12);
+
+    if (hasVideo) {
+      var t = current * duration;
+      // Seeking on every frame is expensive; skip imperceptible moves.
+      if (Math.abs(video.currentTime - t) > 0.02) {
+        video.currentTime = t;
+      }
+    } else if (spinner) {
+      spinner.style.transform = 'rotate(' + (current * 360).toFixed(2) + 'deg)';
+    }
+
+    // Keep easing until we have caught up.
+    if (Math.abs(target - current) > 0.0005) {
+      requestAnimationFrame(render);
+    }
+  }
+
+  function onScroll() {
+    target = progress();
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+
+</script></body></html>

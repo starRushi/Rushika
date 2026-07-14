@@ -1,0 +1,10 @@
+<nav class="nav" data-nav>
+  <a class="nav__mark" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <ul class="nav__links mono">
+    <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a></li>
+    <li><a href="{{ '/resume/' | relative_url }}" {% if page.url contains '/resume' %}aria-current="page"{% endif %}>Resume</a></li>
+    <li><a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects' %}aria-current="page"{% endif %}>Projects</a></li>
+    <li><a href="{{ '/about/' | relative_url }}" {% if page.url contains '/about' %}aria-current="page"{% endif %}>About</a></li>
+    <li><a href="{{ '/contact/' | relative_url }}" {% if page.url contains '/contact' %}aria-current="page"{% endif %}>Contact</a></li>
+  </ul>
+</nav>

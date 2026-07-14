@@ -1,0 +1,38 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+<main class="page wrap">
+  <p class="page__eyebrow mono">Projects</p>
+  <h1 class="page__title">Projects</h1>
+  <hr class="page__rule">
+
+  {% for cat in site.data.categories %}
+    {% assign in_cat = site.projects | where: "category", cat.slug | sort: "year" | reverse %}
+    <section class="cat-section" id="{{ cat.slug }}">
+      <div class="cat-section__head">
+        <h2 class="cat-section__name">{{ cat.name }}</h2>
+        <span class="mono" style="opacity:.55">{{ in_cat.size }}</span>
+      </div>
+
+      {% if in_cat.size == 0 %}
+        <p class="mono" style="opacity:.55">Nothing here yet.</p>
+      {% else %}
+        <div class="grid">
+          {% for project in in_cat %}
+            <a class="card" href="{{ project.url | relative_url }}">
+              <div class="card__img">
+                {% if project.thumbnail %}
+                  <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}">
+                {% endif %}
+              </div>
+              <h3 class="card__name">{{ project.title }}</h3>
+              <p class="card__sum">{{ project.summary }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+  {% endfor %}
+</main>

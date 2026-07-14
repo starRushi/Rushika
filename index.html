@@ -1,0 +1,112 @@
+---
+layout: default
+---
+
+<!-- =============================================================
+     HERO
+     Drop your render at assets/videos/hero.mp4 and it takes over
+     automatically. Until then the placeholder spins in its place
+     so you can see the scroll effect working.
+
+     Video tips: 10 to 20 seconds, no audio, exported at 1920x1080.
+     A turntable spin of a single assembly reads best.
+     ============================================================= -->
+<section class="hero" data-hero>
+  <div class="hero__sticky">
+
+    <video class="hero__video" data-hero-video muted playsinline preload="auto">
+      <source src="{{ '/assets/videos/hero.mp4' | relative_url }}" type="video/mp4">
+    </video>
+
+    <div class="hero__placeholder" data-hero-placeholder>
+      <svg viewBox="-100 -100 200 200" data-spin aria-hidden="true">
+        <g fill="none" stroke="#7cb93d" stroke-width="1.2" opacity="0.9">
+          <circle r="78" stroke="#ecc663" stroke-dasharray="3 6" opacity="0.5"/>
+          <circle r="58"/>
+          <circle r="30" stroke="#fa8f72"/>
+          <path d="M0-58 0-30 M0 30 0 58 M-58 0-30 0 M30 0 58 0"/>
+          <path d="M-41-41-21-21 M41 41 21 21 M41-41 21-21 M-41 41-21 21" opacity="0.6"/>
+          <rect x="-14" y="-14" width="28" height="28" stroke="#f3e7c7"/>
+        </g>
+      </svg>
+      <p class="hero__placeholder-note mono">Placeholder · add assets/videos/hero.mp4</p>
+    </div>
+
+    <div class="hero__scrim"></div>
+
+    <div class="hero__title">
+      <p class="hero__eyebrow mono">Mechanical Engineer</p>
+      <h1 class="hero__name">{{ site.title }}</h1>
+      <hr class="hero__rule">
+      <p class="hero__sub">Things that move, and the reasons they hold together.</p>
+    </div>
+
+    <div class="hero__cue">
+      <span class="hero__cue-line"></span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================================
+     PHILOSOPHY
+     Swap the text below for your own line when you land on it.
+     Wrap a phrase in <em> to give it the gold underline.
+     ============================================================= -->
+<section class="quote">
+  <div class="quote__inner">
+    <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+    <blockquote class="quote__text">
+      A drawing is a promise, and a part is the proof. I design toward the
+      moment the two meet, because that is the only place a <em>good idea</em>
+      is ever actually tested.
+    </blockquote>
+    <p class="quote__attr mono">Design philosophy · placeholder, replace me</p>
+  </div>
+</section>
+
+
+<!-- =============================================================
+     CATEGORIES
+     These come from _data/categories.yml. Edit that file to change
+     the names, the hover text, or the colors. The project count
+     updates itself as you add projects.
+     ============================================================= -->
+<section class="cats">
+  <div class="wrap">
+
+    <div class="cats__head">
+      <h2 class="cats__title">Where the work lives</h2>
+    </div>
+
+    <div class="panels">
+      {% for cat in site.data.categories %}
+        {% assign in_cat = site.projects | where: "category", cat.slug %}
+        <a class="panel"
+           style="--tint: {{ cat.tint }}"
+           href="{{ '/projects/' | relative_url }}#{{ cat.slug }}">
+
+          <span class="panel__count mono">
+            {{ in_cat.size }} project{% if in_cat.size != 1 %}s{% endif %}
+          </span>
+
+          <h3 class="panel__name">{{ cat.name }}</h3>
+
+          <div class="panel__body">
+            <p class="panel__blurb">{{ cat.blurb }}</p>
+            <span class="panel__go mono">
+              View
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" aria-hidden="true">
+                <path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
