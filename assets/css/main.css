@@ -243,16 +243,6 @@ a:hover { color: var(--leaf); }
   position: relative;
 }
 
-/* Hairline rules stand in for the color block that used to frame this. */
-.quote__inner::before,
-.quote__inner::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background: var(--paper-deep);
-}
-.quote__inner::before { margin-bottom: clamp(3rem, 7vh, 4.5rem); }
-.quote__inner::after  { margin-top:    clamp(3rem, 7vh, 4.5rem); }
 
 .quote__inner { max-width: 60rem; margin: 0 auto; padding: 0 var(--edge); }
 
@@ -268,15 +258,20 @@ a:hover { color: var(--leaf); }
 .quote__text {
   font-size: clamp(1.6rem, 3.6vw, 2.9rem);
   line-height: 1.32;
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   margin: 0;
   letter-spacing: -0.01em;
 }
+
+.quote__text p { margin: 0 0 1.5rem; }
+.quote__text p:last-child { margin-bottom: 0; }
+
 .quote__text em {
   font-style: italic;
-  color: var(--rust);
+  color: var(--coral);
   border-bottom: 2px solid var(--gold);
+  font-weight: 700;
 }
 
 .quote__attr { margin-top: 2.5rem; color: var(--rust); opacity: 0.65; }
