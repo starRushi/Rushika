@@ -267,6 +267,37 @@ a:hover { color: var(--leaf); }
 .quote__text p { margin: 0 0 1.5rem; }
 .quote__text p:last-child { margin-bottom: 0; }
 
+/* Divider line with a center diamond, after the first paragraph only. */
+.quote__text p:first-child {
+  position: relative;
+  padding-bottom: 2.5rem;   /* space for the line to sit in */
+  margin-bottom: 2.5rem;
+}
+
+.quote__text p:first-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;                    /* line thickness; bump to 4px for thicker */
+  background: var(--rust);
+}
+
+/* The diamond: a small square turned 45 degrees, centered on the line. */
+.quote__text p:first-child::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;                   /* pulls it down so it straddles the line */
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border: 3px solid var(--paper); /* cream ring so the line appears to break */
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 1;
+}
+
 .quote__text em {
   font-style: italic;
   color: var(--coral);
