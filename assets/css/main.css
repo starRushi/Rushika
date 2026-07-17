@@ -125,7 +125,7 @@ a:hover { color: var(--leaf); }
    forward as you go. Change --runway to make the spin longer.
    =============================================================== */
 .hero {
-  --runway: 300vh;
+  --runway: 200vh;
   height: var(--runway);
   position: relative;
   background: var(--forest);
