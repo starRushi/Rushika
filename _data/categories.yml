@@ -15,15 +15,15 @@
   tint: "#da9a65"
   blurb: "A variety of projects, robotics or otherwise, that focused mainly Human Centered Design."
 
+- name: "Industry & Miscellaneous"
+  slug: "miscellaneous-projects"
+  tint: "#9cae4a"
+  blurb: "Material transport, personal projects, and other things I've made."
+
 - name: "Business"
   slug: "business"
   tint: "#bba458"
   blurb: "Highly developed buisness plans, start-up architecture, finances, and managament."
-
-- name: "Miscellaneous Projects"
-  slug: "miscellaneous-projects"
-  tint: "#9cae4a"
-  blurb: "Material transport, personal projects, and other things I've made."
 
 - name: "Awards & Competitions"
   slug: "awards"
