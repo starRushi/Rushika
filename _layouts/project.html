@@ -3,56 +3,62 @@ layout: default
 ---
 <main class="page wrap">
 
-  <p class="page__eyebrow mono">
-    <a href="{{ '/projects/' | relative_url }}" style="color:inherit">Projects</a>
-    &nbsp;/&nbsp; {{ page.category }}
-  </p>
-  <h1 class="page__title">{{ page.title }}</h1>
-  <hr class="page__rule">
+  <!-- Banner: spans the full content width across the top.
+       Uses `banner:` from the project's front matter, or falls back
+       to `thumbnail:` if no banner is set. Skipped if neither exists. -->
+  {% if page.banner or page.thumbnail %}
+    <img class="project-banner"
+         src="{{ page.banner | default: page.thumbnail | relative_url }}"
+         alt="{{ page.title }}"
+         style="width:100%; aspect-ratio:16/7; object-fit:cover; margin-bottom:3rem">
+  {% endif %}
 
-  <div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:3.5rem;align-items:start">
+  <div style="max-width:52rem; margin:0 auto">
 
-    <div>
-      <div class="prose" style="max-width:none">
-        {{ content }}
-      </div>
+    <p class="page__eyebrow mono">
+      <a href="{{ '/projects/' | relative_url }}" style="color:inherit">Projects</a>
+      &nbsp;/&nbsp; {{ page.category }}
+    </p>
+    <h1 class="page__title">{{ page.title }}</h1>
 
-      {% if page.gallery %}
-        <div class="grid" style="margin-top:3rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
-          {% for shot in page.gallery %}
-            <figure style="margin:0">
-              <img src="{{ shot.src | relative_url }}" alt="{{ shot.caption }}">
-              {% if shot.caption %}
-                <figcaption class="mono" style="margin-top:.6rem;opacity:.6">{{ shot.caption }}</figcaption>
-              {% endif %}
-            </figure>
-          {% endfor %}
-        </div>
-      {% endif %}
+    <div class="mono" style="display:flex; flex-wrap:wrap; gap:1.5rem; opacity:.6; margin-top:1rem">
+      {% if page.year %}<span>{{ page.year }}</span>{% endif %}
+      {% if page.role %}<span>{{ page.role }}</span>{% endif %}
+      {% if page.tools %}<span>{{ page.tools | join: " · " }}</span>{% endif %}
     </div>
 
-    <aside>
-      <p class="mono" style="opacity:.55;margin:0 0 .75rem">Details</p>
-      <ul class="spec">
-        {% if page.year %}<li><span>Year</span><span>{{ page.year }}</span></li>{% endif %}
-        {% if page.role %}<li><span>Role</span><span>{{ page.role }}</span></li>{% endif %}
-        {% if page.tools %}<li><span>Tools</span><span style="text-align:right">{{ page.tools | join: ", " }}</span></li>{% endif %}
-      </ul>
+    <hr class="page__rule">
 
-      {% if page.collaborators %}
-        <p class="mono" style="opacity:.55;margin:2.5rem 0 .75rem">Built with</p>
-        <div class="people">
-          {% for person in page.collaborators %}
-            <a class="person" href="{{ person.linkedin }}" target="_blank" rel="noopener">
-              <span>{{ person.name }}</span>
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          {% endfor %}
-        </div>
-      {% endif %}
-    </aside>
+    <div class="prose" style="max-width:none">
+      {{ content }}
+    </div>
+
+    {% if page.gallery %}
+      <div class="grid" style="margin-top:3rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))">
+        {% for shot in page.gallery %}
+          <figure style="margin:0">
+            <img src="{{ shot.src | relative_url }}" alt="{{ shot.caption }}">
+            {% if shot.caption %}
+              <figcaption class="mono" style="margin-top:.6rem; opacity:.6">{{ shot.caption }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if page.collaborators %}
+      <p class="mono" style="opacity:.55; margin:3rem 0 .75rem">Built with</p>
+      <div class="people">
+        {% for person in page.collaborators %}
+          <a class="person" href="{{ person.linkedin }}" target="_blank" rel="noopener">
+            <span>{{ person.name }}</span>
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
 
   </div>
 </main>
