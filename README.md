@@ -1,5 +1,7 @@
 # Portfolio
 
+This is the portfolio of work compelted by Rushika Prasad. The website was designed and created by me, with the help of some tools. 
+
 ## If I want to run it locally
 
     bundle install
