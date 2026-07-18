@@ -27,12 +27,19 @@ Using both this prototype and futher research into materials, noise minimization
 ## Approach
 
 The project was divided into these sections: 
+
 1) Specifications First
+
 2) Points of Interest
+
 3) Math: Contact Points & Throughput Rates
+
 4) Key Prototype
+
 5) Loading, Key Interfaces, 
+
 6) Suppliers and Materials Research
+
 7) Manufacturing Plans
 
 I first estabilished the metrics and requirements I needed to follow: restrictions on noise generation, money that could be spent repairing it, its throughput and more. Then, I broke down the system into each of the points of interests like the marble feeding mechanism, the corkscrew, the various contact points and angles and other sections that could benifit from the attention and free idea generation. Following this I narrowing down the main design choices, and began the calculations to ensure the numbers I needed to meet would be met. I focused a lot on geometry in realizing how important it would be to wear & tear over time. 
