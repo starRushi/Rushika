@@ -27,9 +27,9 @@ collaborators:
 # Images down the page. Add as many as you like.
 gallery:
   - src: "/assets/images/sample-1.jpg"
-    caption: "Assembly, exploded"
+    caption: "TBD"
   - src: "/assets/images/sample-2.jpg"
-    caption: "First print, showing the interference"
+    caption: Logo prob"
 ---
 
 Heart failure affects an extensive 6.7 million Americans and sends roughly 1 million to the hospital each year, witb 1 in 4 readmitted within a month. Despite the fact that pulmonary congestion builds two to four days, patients can't feel it, and today's in-home monitoring is merely reactive. Preventative measures are expnesive and only possible in the hospital. 
