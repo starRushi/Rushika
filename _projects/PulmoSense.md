@@ -3,7 +3,7 @@
 # COPY THIS FILE TO ADD A PROJECT.
 # The filename becomes the URL: sample-project.md -> /projects/sample-project/
 # ---------------------------------------------------------------
-title: "PulmoSense Market-Ready Project"
+title: "PulmoSense Market-Ready Proposal"
 category: "business"          # must match a slug in _data/categories.yml
 year: 2026
 role: "Team Lead"
