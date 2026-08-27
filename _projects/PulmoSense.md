@@ -34,7 +34,7 @@ gallery:
 
 Heart failure affects an extensive 6.7 million Americans and sends roughly 1 million to the hospital each year, witb 1 in 4 readmitted within a month. Despite the fact that pulmonary congestion builds two to four days, patients can't feel it, and today's in-home monitoring is merely reactive. Preventative measures are expnesive and only possible in the hospital. 
 
-Our team built the full, market-ready business case for PulmoSense, a wearable vest that uses a FLEX-licensed technology to watch lung fluid continuously from home and stream readings straight to medical software accessible by your doctor, enabling an estimated 35% earlier detection of a failure event at 64-89% less cost than existing options.
+I led a team to build the full, market-ready business case for PulmoSense, a wearable vest that uses a FLEX-licensed technology to watch lung fluid continuously from home and stream readings straight to medical software accessible by your doctor, enabling an estimated 35% earlier detection of a failure event at 64-89% less cost than existing options.
 
 ## Approach
 
@@ -52,6 +52,7 @@ Over the course of the semester, through extensive interviews, meetings, and cus
 8) Prototype scope at $306K with itemized BOM tied to a Month-6 build target and Month-9 FDA Pre-Submission
 9) Regulatory and capital plan: $900K Pre-Seed (Launch NY, NIH SBIR Phase I, AHA, Southern Tier REDC) → $1.5–3M Seed → $4–8M Series A, mapped to IDE clinical study (Months 6–21) and 510(k) clearance with first paying hospital by Month 30
 10) Final investor-style presentation awarded perfect final score by a panel of investors
+11) Successfully hand-picked and managed a team of extremely diverse engineering and business backgrounds, and managed coordination, running meetings, leading presentations, and managing conflict.
 
 ## What I would change
 
